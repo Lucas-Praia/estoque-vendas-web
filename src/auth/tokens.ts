@@ -2,7 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import type { NextResponse } from "next/server";
-import { API_ORIGIN, COOKIE_SECURE } from "./env";
+import { API_ORIGIN, COOKIE_SECURE } from "@/lib/env";
 import { getJwtExp } from "./jwt";
 
 export const ACCESS_COOKIE = "dist_access";

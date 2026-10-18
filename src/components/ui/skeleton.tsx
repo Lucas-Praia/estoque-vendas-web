@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 /** Barra linear de 2px no topo da região; indica carregamento sem deslocar o layout. */
 export function LinearProgress({ active = true, className }: { active?: boolean; className?: string }) {

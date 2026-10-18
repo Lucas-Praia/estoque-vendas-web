@@ -3,8 +3,8 @@
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "@/features/auth/session";
-import { cn } from "@/lib/cn";
+import { useSession } from "@/auth/session";
+import { cn } from "@/utils/cn";
 import { BrandMark } from "./brand-mark";
 import { NAV } from "./nav";
 

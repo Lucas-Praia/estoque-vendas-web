@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/input";
 import { InlineAlert } from "@/components/ui/states";
 import { NETWORK_ERROR, errorMessages, toApiError } from "@/lib/api-error";
-import { type LoginInput, loginSchema } from "../schemas";
+import { type LoginInput, loginSchema } from "./schemas";
 
 export function LoginForm({ next }: { next: string }) {
   const router = useRouter();

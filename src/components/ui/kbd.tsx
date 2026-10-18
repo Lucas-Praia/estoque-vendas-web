@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 export function Kbd({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (

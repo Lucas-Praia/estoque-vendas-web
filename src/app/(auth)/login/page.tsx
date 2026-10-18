@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { LoginForm } from "@/auth/login-form";
+import { fetchMe } from "@/auth/me";
+import { safeNextPath } from "@/auth/safe-next";
 import { BrandMark } from "@/components/layout/brand-mark";
-import { LoginForm } from "@/features/auth/components/login-form";
-import { fetchCompany, fetchMe } from "@/lib/api-server";
-import { safeNextPath } from "@/lib/safe-next";
+import { fetchCompany } from "@/lib/api-server";
 
 export const metadata: Metadata = { title: "Entrar" };
 

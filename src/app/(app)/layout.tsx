@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { ErrorState } from "@/components/ui/states";
-import { SessionProvider } from "@/features/auth/session";
+import { fetchMe } from "@/auth/me";
+import { SessionProvider } from "@/auth/session";
 import { NETWORK_ERROR } from "@/lib/api-error";
-import { fetchCompany, fetchMe } from "@/lib/api-server";
+import { fetchCompany } from "@/lib/api-server";
 
 /** Área autenticada. O proxy.ts já renovou o access; aqui só validamos com /auth/me/. */
 export default async function AppLayout({ children }: LayoutProps<"/">) {

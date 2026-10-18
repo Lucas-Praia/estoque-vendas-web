@@ -5,9 +5,9 @@ import {
   clearAuthCookies,
   refreshTokens,
   setAuthCookies,
-} from "@/lib/auth";
+} from "@/auth/tokens";
 import { API_ORIGIN } from "@/lib/env";
-import { isJwtFresh } from "@/lib/jwt";
+import { isJwtFresh } from "@/auth/jwt";
 
 /**
  * BFF: o navegador chama /api/proxy/<caminho no Django>. Aqui o access token

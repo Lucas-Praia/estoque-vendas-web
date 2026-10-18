@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Tokens. --color-primary e --color-primary-fg são sobrescritos no <html> com a
+ * cor da empresa vinda da API (lib/brand.ts); os valores abaixo são o fallback neutro.
+ */
+@theme {
+  --color-primary: #1f2937;
+  --color-primary-fg: #ffffff;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-canvas: #ffffff;
+  --color-subtle: #f8f9fa;
+  --color-ink: #111827;
+  --color-muted: #4b5563;
+  --color-line: #e5e5e5;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  --animate-progress: progress 1.1s ease-in-out infinite;
+
+  @keyframes progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, "SFMono-Regular", monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans text-sm antialiased;
+  }
+  /* Foco visível e consistente em tudo que recebe teclado. */
+  :focus-visible {
+    @apply outline-2 outline-offset-1 outline-primary;
+  }
+  ::selection {
+    @apply bg-primary/15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

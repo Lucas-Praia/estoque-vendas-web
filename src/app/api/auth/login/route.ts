@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { setAuthCookies } from "@/lib/auth";
+import { setAuthCookies } from "@/auth/tokens";
 import { serverApi } from "@/lib/api-server";
-import { loginSchema } from "@/features/auth/schemas";
+import { loginSchema } from "@/auth/schemas";
 
 /** Troca usuário/senha por tokens no Django e os guarda em cookies httpOnly. */
 export async function POST(req: Request) {

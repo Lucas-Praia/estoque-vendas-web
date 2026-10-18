@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";

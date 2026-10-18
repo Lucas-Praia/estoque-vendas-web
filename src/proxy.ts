@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { ACCESS_COOKIE, REFRESH_COOKIE, clearAuthCookies, refreshTokens, setAuthCookies } from "@/lib/auth";
-import { isJwtFresh } from "@/lib/jwt";
+import { ACCESS_COOKIE, REFRESH_COOKIE, clearAuthCookies, refreshTokens, setAuthCookies } from "@/auth/tokens";
+import { isJwtFresh } from "@/auth/jwt";
 
 /**
  * Guarda das páginas. Server Components não podem gravar cookies, então a

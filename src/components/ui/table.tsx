@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 /**
  * Primitivas de tabela densa: cabeçalho fixo, linhas py-1.5, divisórias de 1px.

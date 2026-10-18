@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 type Tone = "neutral" | "success" | "warning" | "danger" | "primary";
 

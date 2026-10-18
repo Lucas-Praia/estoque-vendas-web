@@ -1,5 +1,5 @@
 import { forwardRef, useId } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 
 const control =
   "h-8 w-full rounded-md border border-line bg-canvas px-2 text-sm text-ink placeholder:text-neutral-400 " +

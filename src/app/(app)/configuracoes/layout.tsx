@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { fetchMe } from "@/lib/api-server";
+import { fetchMe } from "@/auth/me";
 
 /** Telas de administração: só `is_staff` (o back também recusa o PATCH /company/). */
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

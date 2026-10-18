@@ -1,5 +1,5 @@
 import { mediaUrl } from "@/lib/api-client";
-import { cn } from "@/lib/cn";
+import { cn } from "@/utils/cn";
 import type { Company } from "@/types";
 
 /** Logo da empresa (via proxy) ou, sem logo, o nome vindo da API. */
