@@ -1,9 +1,5 @@
-import type { Unit } from "@/types";
+import type { Unit } from "@/interfaces";
 
-/**
- * Formatação para exibição. Os decimais chegam da API como string ("25.00",
- * "0.350"); a conversão para número acontece só aqui, nunca em cálculos.
- */
 export const TIME_ZONE = "America/Manaus";
 export const LOCALE = "pt-BR";
 
@@ -32,7 +28,6 @@ const dateTimeFormat = new Intl.DateTimeFormat(LOCALE, {
 
 const EMPTY = "—";
 
-/** Unidades que aceitam quantidade fracionada (regra do back). */
 export const FRACTIONAL_UNITS: ReadonlySet<Unit> = new Set<Unit>(["KG", "L"]);
 
 export function isFractionalUnit(unit: Unit | null | undefined) {
@@ -50,7 +45,6 @@ export function formatMoney(value: string | number | null | undefined) {
   return n === null ? EMPTY : money.format(n);
 }
 
-/** KG e L com 3 casas (0,350); demais unidades inteiras. */
 export function formatQuantity(value: string | number | null | undefined, unit?: Unit | null) {
   const n = toNumber(value);
   if (n === null) return EMPTY;
@@ -59,7 +53,6 @@ export function formatQuantity(value: string | number | null | undefined, unit?:
 
 function toDate(value: string | Date | null | undefined) {
   if (!value) return null;
-  // "2026-10-18" (só data) seria lido como UTC e poderia voltar um dia em Manaus.
   const d = typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
     ? new Date(`${value}T12:00:00`)
     : new Date(value);

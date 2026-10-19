@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
-import type { Company } from "@/types";
+import type { Company } from "@/interfaces";
 
-/** Tema neutro usado só enquanto a API não informa a cor da empresa. */
 export const NEUTRAL_PRIMARY = "#1F2937";
 
 const HEX = /^#[0-9a-f]{6}$/i;
@@ -21,7 +20,6 @@ export function contrastRatio(a: string, b: string) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-/** Texto sobre a cor primária: branco ou quase-preto, o que tiver mais contraste. */
 export function foregroundFor(background: string) {
   return contrastRatio(background, TEXT_LIGHT) >= contrastRatio(background, TEXT_DARK)
     ? TEXT_LIGHT
@@ -32,8 +30,7 @@ export function normalizeColor(color: string | null | undefined) {
   return color && HEX.test(color) ? color.toUpperCase() : NEUTRAL_PRIMARY;
 }
 
-/** Variáveis CSS aplicadas no <html>; o Tailwind as consome via `bg-primary`, `text-primary-fg`... */
-export function brandStyle(company: Pick<Company, "tx_primary_color"> | null): CSSProperties {
+export function companyThemeStyle(company: Pick<Company, "tx_primary_color"> | null): CSSProperties {
   const primary = normalizeColor(company?.tx_primary_color);
   return {
     "--color-primary": primary,

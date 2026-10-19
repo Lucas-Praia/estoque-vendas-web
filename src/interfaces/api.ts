@@ -1,10 +1,6 @@
 import type { Readable, Writable } from "openapi-typescript-helpers";
-import type { components } from "./api";
+import type { components } from "./generated/api-schema";
 
-/**
- * Atalhos para os schemas gerados em `api.d.ts` (não escreva interfaces à mão).
- * `Model` = como a API devolve; `Input` = o que a API aceita no corpo.
- */
 type Schemas = components["schemas"];
 
 export type Model<K extends keyof Schemas> = Readable<Schemas[K]>;
@@ -14,3 +10,13 @@ export type Me = Model<"Me">;
 export type Company = Model<"Company">;
 export type Unit = Schemas["TxUnitEnum"];
 export type PaymentMethod = Schemas["TxMethodEnum"];
+
+export type FieldErrors = Record<string, string[]>;
+
+export interface NextFetchInit extends RequestInit {
+  next?: NextFetchRequestConfig;
+}
+
+export type FetchResult<T> =
+  | { data: T; error?: never; response: Response }
+  | { data?: never; error: unknown; response: Response };

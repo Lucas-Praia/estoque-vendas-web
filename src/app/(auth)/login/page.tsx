@@ -1,27 +1,26 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/auth/login-form";
-import { fetchMe } from "@/auth/me";
-import { safeNextPath } from "@/auth/safe-next";
-import { BrandMark } from "@/components/layout/brand-mark";
+import { getCurrentUser } from "@/auth/current-user";
+import { getSafeRedirectPath } from "@/auth/redirect-path";
+import { CompanyLogo } from "@/components/layout/company-logo";
 import { fetchCompany } from "@/lib/api-server";
 
 export const metadata: Metadata = { title: "Entrar" };
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const { next } = await searchParams;
-  const nextPath = safeNextPath(typeof next === "string" ? next : null);
+  const nextPath = getSafeRedirectPath(typeof next === "string" ? next : null);
 
-  // Já logado de verdade (o back confirmou)? Vai direto. Cookie inválido cai no formulário.
-  const [{ me }, company] = await Promise.all([fetchMe(), fetchCompany()]);
+  const [{ me }, company] = await Promise.all([getCurrentUser(), fetchCompany()]);
   if (me) redirect(nextPath);
 
   return (
     <main className="grid min-h-full place-items-center bg-subtle px-4">
       <div className="w-full max-w-sm border border-line bg-canvas">
         {company && (
-          <div className="flex min-h-20 items-center border-b border-line px-6 py-4">
-            <BrandMark company={company} size="lg" />
+          <div className="flex min-h-12 items-center justify-center border-b border-line px-6 py-4">
+            <CompanyLogo company={company} size="lg" />
           </div>
         )}
         <div className="px-6 py-5">

@@ -3,30 +3,16 @@ import {
   ArrowLeftRight,
   BarChart3,
   Boxes,
-  Building2,
   Contact,
   Receipt,
   ScanBarcode,
   Settings,
   Tags,
   Truck,
-  type LucideIcon,
 } from "lucide-react";
+import type { NavGroup } from "@/interfaces";
 
-export interface NavItem {
-  href: string;
-  label: string;
-  icon: LucideIcon;
-  /** Só aparece (e só abre) para `is_staff`. */
-  staffOnly?: boolean;
-}
-
-export interface NavGroup {
-  label: string;
-  items: NavItem[];
-}
-
-export const NAV: NavGroup[] = [
+export const NAV_GROUPS: NavGroup[] = [
   {
     label: "Operação",
     items: [
@@ -58,5 +44,3 @@ export const NAV: NavGroup[] = [
     ],
   },
 ];
-
-export const BrandIcon = Building2;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { fetchCompany } from "@/lib/api-server";
-import { brandStyle } from "@/lib/brand";
+import { companyThemeStyle } from "@/lib/company-theme";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const company = await fetchCompany();
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${mono.variable} h-full`} style={brandStyle(company)}>
+    <html lang="pt-BR" className={`${inter.variable} ${mono.variable} h-full`} style={companyThemeStyle(company)}>
       <body className="h-full">
         <Providers>{children}</Providers>
       </body>

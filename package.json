@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "gen:api": "openapi-typescript http://localhost:8000/api/schema/ --read-write-markers -o src/types/api.d.ts"
+    "gen:api": "openapi-typescript http://localhost:8000/api/schema/ --read-write-markers -o src/interfaces/generated/api-schema.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.2",

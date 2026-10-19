@@ -1,4 +1,3 @@
-/** Lê o `exp` (segundos) do payload de um JWT sem validar a assinatura — quem valida é o back. */
 export function getJwtExp(token: string): number | null {
   const payload = token.split(".")[1];
   if (!payload) return null;
@@ -11,7 +10,6 @@ export function getJwtExp(token: string): number | null {
   }
 }
 
-/** Considera expirado com folga, para não enviar um token que vence no meio da requisição. */
 export function isJwtFresh(token: string | undefined, skewSeconds = 30): token is string {
   if (!token) return false;
   const exp = getJwtExp(token);

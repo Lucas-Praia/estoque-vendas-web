@@ -2,24 +2,9 @@
 
 import { X } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
-import { cn } from "@/utils/cn";
+import type { DialogProps } from "@/interfaces";
+import { classNames } from "@/utils/class-names";
 
-interface DialogProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  description?: string;
-  children: React.ReactNode;
-  footer?: React.ReactNode;
-  /** "center" para diálogos; "right" para o painel lateral de formulários. */
-  placement?: "center" | "right";
-  className?: string;
-}
-
-/**
- * Baseado no <dialog> nativo: foco preso, Esc fecha e o foco volta ao elemento
- * que abriu — o que o PDV precisa para operar só no teclado.
- */
 export function Dialog({ open, onClose, title, description, children, footer, placement = "center", className }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -41,7 +26,7 @@ export function Dialog({ open, onClose, title, description, children, footer, pl
       }}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-labelledby={titleId}
-      className={cn(
+      className={classNames(
         "m-0 max-h-none max-w-none border-line bg-canvas p-0 text-ink backdrop:bg-neutral-900/30",
         placement === "center" &&
           "top-1/2 left-1/2 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md border",
@@ -68,8 +53,4 @@ export function Dialog({ open, onClose, title, description, children, footer, pl
       )}
     </dialog>
   );
-}
-
-export function Drawer(props: Omit<DialogProps, "placement">) {
-  return <Dialog {...props} placement="right" />;
 }

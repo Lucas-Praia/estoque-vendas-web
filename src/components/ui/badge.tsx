@@ -1,8 +1,7 @@
-import { cn } from "@/utils/cn";
+import type { BadgeProps, BadgeTone } from "@/interfaces";
+import { classNames } from "@/utils/class-names";
 
-type Tone = "neutral" | "success" | "warning" | "danger" | "primary";
-
-const tones: Record<Tone, string> = {
+const tones: Record<BadgeTone, string> = {
   neutral: "border-line text-muted",
   success: "border-green-200 text-green-800",
   warning: "border-amber-300 text-amber-800",
@@ -10,11 +9,10 @@ const tones: Record<Tone, string> = {
   primary: "border-primary/30 text-primary",
 };
 
-/** Status discreto: só borda e texto, nunca bloco colorido. */
-export function Badge({ tone = "neutral", className, ...props }: React.HTMLAttributes<HTMLSpanElement> & { tone?: Tone }) {
+export function Badge({ tone = "neutral", className, ...props }: BadgeProps) {
   return (
     <span
-      className={cn(
+      className={classNames(
         "inline-flex items-center rounded-sm border px-1.5 text-2xs font-medium uppercase tracking-wide",
         tones[tone],
         className,

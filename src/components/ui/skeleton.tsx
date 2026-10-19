@@ -1,21 +1,7 @@
-import { cn } from "@/utils/cn";
+import type { SkeletonLineProps, SkeletonRowsProps } from "@/interfaces";
+import { classNames } from "@/utils/class-names";
 
-/** Barra linear de 2px no topo da região; indica carregamento sem deslocar o layout. */
-export function LinearProgress({ active = true, className }: { active?: boolean; className?: string }) {
-  return (
-    <div
-      role="progressbar"
-      aria-label="Carregando"
-      aria-hidden={!active}
-      className={cn("relative h-0.5 w-full overflow-hidden", active ? "bg-primary/10" : "bg-transparent", className)}
-    >
-      {active && <div className="absolute inset-y-0 left-0 w-2/5 animate-progress bg-primary" />}
-    </div>
-  );
-}
-
-/** Esqueleto de linhas de tabela, com a mesma altura das linhas reais. */
-export function SkeletonRows({ rows = 8, columns }: { rows?: number; columns: number }) {
+export function SkeletonRows({ rows = 8, columns }: SkeletonRowsProps) {
   return (
     <>
       {Array.from({ length: rows }, (_, r) => (
@@ -31,6 +17,6 @@ export function SkeletonRows({ rows = 8, columns }: { rows?: number; columns: nu
   );
 }
 
-export function SkeletonLine({ className }: { className?: string }) {
-  return <div aria-hidden className={cn("h-3 rounded-sm bg-neutral-100", className)} />;
+export function SkeletonLine({ className }: SkeletonLineProps) {
+  return <div aria-hidden className={classNames("h-3 rounded-sm bg-neutral-100", className)} />;
 }

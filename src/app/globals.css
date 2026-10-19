@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/*
- * Tokens. --color-primary e --color-primary-fg são sobrescritos no <html> com a
- * cor da empresa vinda da API (lib/brand.ts); os valores abaixo são o fallback neutro.
- */
 @theme {
   --color-primary: #1f2937;
   --color-primary-fg: #ffffff;
@@ -37,7 +33,6 @@
   body {
     @apply bg-canvas text-ink font-sans text-sm antialiased;
   }
-  /* Foco visível e consistente em tudo que recebe teclado. */
   :focus-visible {
     @apply outline-2 outline-offset-1 outline-primary;
   }

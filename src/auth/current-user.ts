@@ -1,13 +1,10 @@
 import "server-only";
 
+import type { CurrentUserResult } from "@/interfaces";
 import { serverApi } from "@/lib/api-server";
-import type { Me } from "@/types";
 import { getAccessToken } from "./tokens";
 
-export type MeResult = { me: Me } | { me: null; status: number };
-
-/** Usuário logado. `status` 401 = sessão inválida; 0 = back fora do ar. */
-export async function fetchMe(): Promise<MeResult> {
+export async function getCurrentUser(): Promise<CurrentUserResult> {
   const access = await getAccessToken();
   if (!access) return { me: null, status: 401 };
   try {

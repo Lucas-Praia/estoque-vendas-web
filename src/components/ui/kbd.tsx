@@ -1,9 +1,10 @@
-import { cn } from "@/utils/cn";
+import type { KbdProps } from "@/interfaces";
+import { classNames } from "@/utils/class-names";
 
-export function Kbd({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
+export function Kbd({ className, ...props }: KbdProps) {
   return (
     <kbd
-      className={cn(
+      className={classNames(
         "inline-flex h-4 min-w-4 items-center justify-center rounded-sm border border-line bg-subtle px-1 font-mono text-2xs text-muted",
         className,
       )}

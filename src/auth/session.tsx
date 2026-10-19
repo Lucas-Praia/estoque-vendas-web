@@ -1,17 +1,11 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import type { Company, Me } from "@/types";
-
-interface Session {
-  me: Me;
-  company: Company | null;
-}
+import type { Session, SessionProviderProps } from "@/interfaces";
 
 const SessionContext = createContext<Session | null>(null);
 
-/** Usuário e empresa carregados no servidor pelo layout (app). */
-export function SessionProvider({ value, children }: { value: Session; children: React.ReactNode }) {
+export function SessionProvider({ value, children }: SessionProviderProps) {
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }
 

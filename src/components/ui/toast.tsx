@@ -2,31 +2,20 @@
 
 import { CheckCircle2, AlertTriangle, X } from "lucide-react";
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
-import { cn } from "@/utils/cn";
-
-type Tone = "success" | "error";
-interface Toast {
-  id: number;
-  tone: Tone;
-  message: string;
-}
-
-interface ToastApi {
-  success: (message: string) => void;
-  error: (message: string) => void;
-}
+import type { ChildrenProps, ToastApi, ToastMessage, ToastTone } from "@/interfaces";
+import { classNames } from "@/utils/class-names";
 
 const ToastContext = createContext<ToastApi | null>(null);
 const DURATION_MS = 4000;
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const [toasts, setToasts] = useState<Toast[]>([]);
+export function ToastProvider({ children }: ChildrenProps) {
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const nextId = useRef(0);
 
   const dismiss = useCallback((id: number) => setToasts((list) => list.filter((t) => t.id !== id)), []);
 
   const push = useCallback(
-    (tone: Tone, message: string) => {
+    (tone: ToastTone, message: string) => {
       const id = ++nextId.current;
       setToasts((list) => [...list.slice(-3), { id, tone, message }]);
       setTimeout(() => dismiss(id), tone === "error" ? DURATION_MS * 2 : DURATION_MS);
@@ -54,7 +43,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             ) : (
               <AlertTriangle aria-hidden className="mt-0.5 size-4 shrink-0 text-red-600" />
             )}
-            <p className={cn("flex-1", t.tone === "error" && "text-red-800")}>{t.message}</p>
+            <p className={classNames("flex-1", t.tone === "error" && "text-red-800")}>{t.message}</p>
             <button type="button" onClick={() => dismiss(t.id)} aria-label="Fechar aviso" className="text-muted">
               <X aria-hidden className="size-3.5" />
             </button>

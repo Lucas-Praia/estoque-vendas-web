@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { formatDate, formatDateTime, formatMoney, formatQuantity, isFractionalUnit } from "./format";
 
-// Intl usa espaço não separável entre "R$" e o valor.
 const nbsp = (s: string) => s.replace(/ /g, " ");
 
 describe("formatMoney", () => {

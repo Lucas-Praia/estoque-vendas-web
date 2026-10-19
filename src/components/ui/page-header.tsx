@@ -1,5 +1,6 @@
-/** Cabeçalho de tela: título direto, contexto curto e ações à direita. */
-export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: React.ReactNode }) {
+import type { PageHeaderProps } from "@/interfaces";
+
+export function PageHeader({ title, description, actions }: PageHeaderProps) {
   return (
     <header className="flex min-h-12 items-center justify-between gap-4 border-b border-line px-4 py-2">
       <div className="min-w-0">

@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { fetchMe } from "@/auth/me";
+import { getCurrentUser } from "@/auth/current-user";
+import type { ChildrenProps } from "@/interfaces";
 
-/** Telas de administração: só `is_staff` (o back também recusa o PATCH /company/). */
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { me } = await fetchMe();
+export default async function AdminLayout({ children }: ChildrenProps) {
+  const { me } = await getCurrentUser();
   if (!me?.is_staff) redirect("/pdv");
   return children;
 }

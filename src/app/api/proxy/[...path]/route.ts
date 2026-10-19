@@ -6,16 +6,12 @@ import {
   refreshTokens,
   setAuthCookies,
 } from "@/auth/tokens";
-import { API_ORIGIN } from "@/lib/env";
 import { isJwtFresh } from "@/auth/jwt";
+import type { AuthTokens } from "@/interfaces";
+import { API_ORIGIN } from "@/lib/env";
 
-/**
- * BFF: o navegador chama /api/proxy/<caminho no Django>. Aqui o access token
- * (cookie httpOnly) vira header Authorization; com 401, renova uma vez e repete.
- */
 const PREFIX = "/api/proxy";
 
-/** Só repassa a API e a mídia; nunca as rotas de token (o navegador não deve ver tokens). */
 function isAllowed(path: string) {
   if (path.startsWith("/api/auth/token")) return false;
   return path.startsWith("/api/") || path.startsWith("/media/");
@@ -36,7 +32,7 @@ async function handle(req: NextRequest) {
 
   const refresh = req.cookies.get(REFRESH_COOKIE)?.value;
   let access = req.cookies.get(ACCESS_COOKIE)?.value;
-  let renewed: { access: string; refresh?: string } | null = null;
+  let renewed: AuthTokens | null = null;
 
   const renew = async () => {
     renewed = refresh ? await refreshTokens(refresh) : null;

@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/ui/page-header";
+import type { ModulePlaceholderProps } from "@/interfaces";
 
-/** Rota já navegável cuja tela chega numa fase posterior. */
-export function ModulePlaceholder({ title, note }: { title: string; note: string }) {
+export function ModulePlaceholder({ title, note }: ModulePlaceholderProps) {
   return (
     <>
       <PageHeader title={title} />

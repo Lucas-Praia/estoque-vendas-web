@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/input";
-import { InlineAlert } from "@/components/ui/states";
+import { Field } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { InlineAlert } from "@/components/ui/inline-alert";
+import type { LoginFormProps, LoginInput } from "@/interfaces";
 import { NETWORK_ERROR, errorMessages, toApiError } from "@/lib/api-error";
-import { type LoginInput, loginSchema } from "./schemas";
+import { loginSchema } from "./schemas";
 
-export function LoginForm({ next }: { next: string }) {
+export function LoginForm({ next }: LoginFormProps) {
   const router = useRouter();
   const [serverErrors, setServerErrors] = useState<string[]>([]);
   const {

@@ -2,10 +2,6 @@ import { type NextRequest, NextResponse } from "next/server";
 import { ACCESS_COOKIE, REFRESH_COOKIE, clearAuthCookies, refreshTokens, setAuthCookies } from "@/auth/tokens";
 import { isJwtFresh } from "@/auth/jwt";
 
-/**
- * Guarda das páginas. Server Components não podem gravar cookies, então a
- * renovação silenciosa do access acontece aqui, antes da renderização.
- */
 export async function proxy(req: NextRequest) {
   const access = req.cookies.get(ACCESS_COOKIE)?.value;
   if (isJwtFresh(access)) return NextResponse.next();
@@ -21,7 +17,6 @@ export async function proxy(req: NextRequest) {
     return res;
   }
 
-  // O novo access vale já para esta renderização e para as próximas requisições.
   req.cookies.set(ACCESS_COOKIE, renewed.access);
   const res = NextResponse.next({ request: { headers: req.headers } });
   setAuthCookies(res.cookies, renewed);

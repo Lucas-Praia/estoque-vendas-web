@@ -1,15 +1,8 @@
-/**
- * Erros da API em um formato só, para mostrar ao usuário exatamente o que o back mandou:
- * - regra de negócio: `{ "detail": "..." }`
- * - validação: `{ "campo": ["..."], "items": [{ "nb_quantity": ["..."] }] }`
- */
-export type FieldErrors = Record<string, string[]>;
+import type { FetchResult, FieldErrors } from "@/interfaces";
 
 export class ApiError extends Error {
   readonly status: number;
-  /** Mensagens de campo, com o caminho achatado (ex.: `items.0.nb_quantity`). */
   readonly fieldErrors: FieldErrors;
-  /** Tudo que deve aparecer num aviso geral (detail + non_field_errors + campos sem input na tela). */
   readonly messages: string[];
 
   constructor(status: number, messages: string[], fieldErrors: FieldErrors = {}) {
@@ -78,21 +71,12 @@ export const NETWORK_ERROR = new ApiError(0, [
   "Não foi possível conectar ao servidor. Verifique a rede e tente de novo.",
 ]);
 
-/** Todas as mensagens (gerais e de campo) em uma lista, para toasts e estados de erro. */
 export function errorMessages(error: unknown): string[] {
   if (!(error instanceof ApiError)) return ["Erro inesperado."];
   const fields = Object.entries(error.fieldErrors).map(([field, msgs]) => `${field}: ${msgs.join(" ")}`);
   return fields.length ? [...new Set([...error.messages.filter((m) => m !== FIELDS_HINT), ...fields])] : error.messages;
 }
 
-type FetchResult<T> =
-  | { data: T; error?: never; response: Response }
-  | { data?: never; error: unknown; response: Response };
-
-/**
- * Converte o resultado do openapi-fetch em dado ou exceção, para o TanStack Query
- * tratar `error` de forma uniforme.
- */
 export async function unwrap<T>(request: Promise<FetchResult<T>>): Promise<T> {
   let result: FetchResult<T>;
   try {
